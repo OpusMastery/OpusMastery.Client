@@ -7,7 +7,9 @@ declare module '@vue/runtime-core' {
     }
 }
 
-const defaultHeaders = { Accept: 'application/json' }
+const defaultHeaders = {
+    Accept: 'application/json'
+};
 
 const apiInstance = axios.create({
     baseURL: 'https://opusmastery.org/api',
