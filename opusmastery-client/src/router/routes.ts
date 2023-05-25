@@ -8,25 +8,25 @@ const routes: RouteRecordRaw[] = [
     },
     {
         path: '/about',
-        component: () => import('pages/HelloWorldPage.vue'),
+        component: () => import('pages/landing/HelloWorldPage.vue'),
         meta: {
-            title: 'About Page'
+            title: 'About us'
         }
     },
     {
         path: '/sign-in',
-        component: () => import('pages/LoginPage.vue'),
+        component: () => import('pages/identity/LoginPage.vue'),
         meta: {
-            title: 'Login Page'
+            title: 'Sign-in to explore your Company'
         }
     },
     {
         path: '/:catchAll(.*)',
-        component: () => import('pages/ErrorNotFound.vue'),
+        component: () => import('pages/notFound/NotFoundPage.vue'),
         meta: {
-            title: 'About Page'
+            title: '404 Not Found'
         }
-    },
+    }
 ];
 
 export default routes;

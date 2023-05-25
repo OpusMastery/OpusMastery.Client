@@ -55,7 +55,7 @@ export default {
 }
 
 </script>
-<style scoped lang="sass">
+<style lang="sass" scoped>
 .employee-card
     width: 100%
     max-width: 328px
