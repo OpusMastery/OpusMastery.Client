@@ -1,7 +1,7 @@
 <template>
     <div class="login">
         <div class="text-h3">
-            Login into The Hub <q-badge align="middle">v1.1.000</q-badge>
+            Login into The Employee Hub <q-badge align="top">v1.1.000</q-badge>
         </div>
         <form @submit.prevent="submitLoginForm">
             <div>
@@ -30,32 +30,44 @@
 
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref } from 'vue';
-import { loginWithPassword } from 'src/api/identity';
+import { useIdentityStore } from 'stores/indentity/identityStore';
 import EmployeeCard from 'components/employee/EmployeeCard.vue';
+
+const identityStore = useIdentityStore();
 
 const email = ref('');
 const password = ref('');
-
-onMounted(() => {
-    console.log(email);
-});
 
 onBeforeMount(() => {
     console.log(email);
 });
 
-const submitLoginForm = async () => {
-    console.log(`Email: ${email.value}, Password: ${password.value}`);
+onMounted(() => {
+    console.log(email);
+});
 
-    await loginWithPassword({
-        email: email.value,
-        password: password.value
-    });
+async function submitLoginForm() {
+    const email1 = email.value;
+    const password1 = password.value;
+    const object = { email1, password1 }
+
+    console.log(`Email: ${email.value}, Password: ${password.value}`);
+    await identityStore.authenticateUser(object)
 }
+
+// const submitLoginForm = async () => {
+//     const email = this.email.value;
+//     const password = this.password.value;
+//     const object = { email, password }
+//
+//     console.log(`Email: ${email.value}, Password: ${password.value}`);
+//     await identityStore.authenticate(object)
+// }
 </script>
 
 <style lang="sass" scoped>
 .login
+    margin-top: 200px
     text-align: center
 
 .login form

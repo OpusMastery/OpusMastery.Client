@@ -13,15 +13,8 @@
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  PropType,
-  computed,
-  ref,
-  toRef,
-  Ref,
-} from 'vue';
-import { Todo, Meta } from './models';
+import { defineComponent, PropType, computed, ref, toRef, Ref } from 'vue';
+import { Todo, Meta } from 'stores/models';
 
 function useClickCount() {
   const clickCount = ref(0);
