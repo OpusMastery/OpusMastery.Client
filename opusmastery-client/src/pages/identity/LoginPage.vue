@@ -18,7 +18,7 @@
         </form>
     </div>
     <EmployeeCard
-        name="Rostyslav Nakarlovich"
+        full-name="Rostyslav Nakarlovich"
         position="Software Engineer"
         email="example@gmail.com"
         phone="(209) 501-0109"
