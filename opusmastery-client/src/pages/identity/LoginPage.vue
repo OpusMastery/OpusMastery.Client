@@ -20,6 +20,7 @@
     <EmployeeCard
         full-name="Rostyslav Nakarlovich"
         position="Software Engineer"
+        status="Active"
         email="example@gmail.com"
         phone="(209) 501-0109"
         department-name="R&D"

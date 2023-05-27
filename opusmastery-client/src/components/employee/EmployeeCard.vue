@@ -5,22 +5,26 @@
                 <q-avatar size="76px">
                     <img src="https://cdn.quasar.dev/img/avatar.png" alt="Employee avatar">
                 </q-avatar>
-                <div class="text-h6 text-bold">{{props.fullName}}</div>
-                <div class="text-subtitle2 text-grey-7 text-medium">{{props.position}}</div>
-                <q-btn unelevated rounded color="primary" label="Active" disable />
+                <div class="text-h6 text-bold">{{ props.fullName }}</div>
+                <div class="text-subtitle2 text-grey-7 text-medium">{{ props.position }}</div>
+                <BaseStateLabel
+                    class="employee-status-label text-bold"
+                    :title="upperCaseStatus"
+                    :color="statusColor"
+                />
             </div>
         </q-card-section>
         <q-card-section class="card-entry">
             <div class="employee-contact-info">
-                <div class="text-subtitle1 text-black"> <q-icon :name="matMailOutline" /> &nbsp;{{props.email}}</div>
-                <div class="text-subtitle1 text-black"> <q-icon :name="matPhoneIphone" /> &nbsp;{{props.phone}}</div>
+                <div class="text-subtitle1 text-black"> <q-icon :name="matMailOutline" /> &nbsp;{{ props.email }}</div>
+                <div class="text-subtitle1 text-black"> <q-icon :name="matPhoneIphone" /> &nbsp;{{ props.phone }}</div>
             </div>
         </q-card-section>
         <q-card-section class="card-entry">
             <div class="employee-work-info">
                 <div>
                     <div class="text-subtitle1 text-black">Department</div>
-                    <div class="text-subtitle1 text-black text-medium">{{props.departmentName}}</div>
+                    <div class="text-subtitle1 text-black text-medium">{{ props.departmentName }}</div>
                 </div>
                 <div>
                     <div class="text-subtitle1 text-black">Date of joining</div>
@@ -32,18 +36,34 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import { matMailOutline, matPhoneIphone } from '@quasar/extras/material-icons';
 import { formatDate } from 'src/utils/date/dateParser';
+import BaseStateLabel from 'components/base/BaseStateLabel.vue';
+
+const labelColors: Record<string, string> = {
+    'Active': '#1d322fe6',
+    'Inactive': '#c4975bff'
+};
 
 const props = defineProps<{
     fullName: string,
     position: string,
+    status: string,
     email: string,
     phone: string,
     departmentName: string,
     dateOfJoining: string
 }>();
+
+const upperCaseStatus = computed(() => {
+    return props.status.toUpperCase();
+})
+const statusColor = computed(() => {
+    return labelColors[props.status];
+});
 </script>
+
 <style lang="sass" scoped>
 .employee-card
     width: 100%
@@ -60,6 +80,9 @@ const props = defineProps<{
     flex-direction: column
     row-gap: 4px
     align-items: center
+
+.employee-status-label
+    margin-top: 6px
 
 .employee-contact-info
     padding: 10px 16px
