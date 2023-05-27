@@ -30,7 +30,7 @@
 <script setup lang="ts">
 import { onBeforeMount, onMounted, ref } from 'vue';
 import { loginWithPassword } from 'src/api/identity';
-import EmployeeCard from 'components/employees/EmployeeCard.vue';
+import EmployeeCard from 'components/employee/EmployeeCard.vue';
 
 const email = ref('');
 const password = ref('');

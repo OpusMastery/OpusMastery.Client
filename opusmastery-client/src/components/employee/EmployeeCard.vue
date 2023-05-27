@@ -5,51 +5,44 @@
                 <q-avatar size="76px">
                     <img src="https://cdn.quasar.dev/img/avatar.png" alt="Employee avatar">
                 </q-avatar>
-                <div class="text-h6 text-bold">{{fullName}}</div>
-                <div class="text-subtitle2 text-grey-7 text-medium">{{position}}</div>
+                <div class="text-h6 text-bold">{{props.fullName}}</div>
+                <div class="text-subtitle2 text-grey-7 text-medium">{{props.position}}</div>
                 <q-btn unelevated rounded color="primary" label="Active" disable />
             </div>
         </q-card-section>
         <q-card-section class="card-entry">
             <div class="employee-contact-info">
-                <div class="text-subtitle1 text-black"> <q-icon :name="matMailOutline" /> &nbsp;{{email}}</div>
-                <div class="text-subtitle1 text-black"> <q-icon :name="matPhoneIphone" /> &nbsp;{{phone}}</div>
+                <div class="text-subtitle1 text-black"> <q-icon :name="matMailOutline" /> &nbsp;{{props.email}}</div>
+                <div class="text-subtitle1 text-black"> <q-icon :name="matPhoneIphone" /> &nbsp;{{props.phone}}</div>
             </div>
         </q-card-section>
         <q-card-section class="card-entry">
             <div class="employee-work-info">
                 <div>
                     <div class="text-subtitle1 text-black">Department</div>
-                    <div class="text-subtitle1 text-black text-medium">{{departmentName}}</div>
+                    <div class="text-subtitle1 text-black text-medium">{{props.departmentName}}</div>
                 </div>
                 <div>
                     <div class="text-subtitle1 text-black">Date of joining</div>
-                    <div class="text-subtitle1 text-black text-medium">{{dateOfJoining}}</div>
+                    <div class="text-subtitle1 text-black text-medium">{{ formatDate(new Date(props.dateOfJoining), 'MM-DD-YYYY') }}</div>
                 </div>
             </div>
         </q-card-section>
     </q-card>
 </template>
 
-<script lang="ts">
-import {matMailOutline, matPhoneIphone} from '@quasar/extras/material-icons';
+<script setup lang="ts">
+import { matMailOutline, matPhoneIphone } from '@quasar/extras/material-icons';
+import { formatDate } from 'src/utils/date/dateParser';
 
-export default {
-    props: {
-        fullName: String,
-        position: String,
-        email: String,
-        phone: String,
-        departmentName: String,
-        dateOfJoining: Date
-    },
-
-    setup(props) {
-        console.log(props);
-        return { props, matMailOutline, matPhoneIphone };
-    }
-}
-
+const props = defineProps<{
+    fullName: string,
+    position: string,
+    email: string,
+    phone: string,
+    departmentName: string,
+    dateOfJoining: string
+}>();
 </script>
 <style lang="sass" scoped>
 .employee-card
