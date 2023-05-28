@@ -1,6 +1,6 @@
-import {store} from 'quasar/wrappers'
-import {createPinia} from 'pinia'
-import {Router} from 'vue-router';
+import { Router } from 'vue-router';
+import { store }  from 'quasar/wrappers'
+import { createPinia } from 'pinia'
 
 declare module 'pinia' {
     export interface PiniaCustomProperties {

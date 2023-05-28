@@ -13,14 +13,14 @@ const defaultHeaders = {
 };
 
 const apiInstance = axios.create({
-    baseURL: 'https://opusmastery.org/api',
+    baseURL: 'https://opusmastery.org',
     headers: defaultHeaders
 });
 
 export default boot(({ app }) => {
     axios.interceptors.request.use(async (config) => {
         const identityStore = useIdentityStore();
-        const accessToken = await identityStore.refreshToken();
+        const accessToken = identityStore.refreshAuthenticationTokens();
 
         if (accessToken && config.headers) {
             config.headers.Authorization = `Bearer ${accessToken}`;

@@ -46,23 +46,10 @@ onMounted(() => {
     console.log(email);
 });
 
-async function submitLoginForm() {
-    const email1 = email.value;
-    const password1 = password.value;
-    const object = { email1, password1 }
-
+const submitLoginForm = async () => {
     console.log(`Email: ${email.value}, Password: ${password.value}`);
-    await identityStore.authenticateUser(object)
+    await identityStore.authenticateUser({ email: email.value, password: password.value })
 }
-
-// const submitLoginForm = async () => {
-//     const email = this.email.value;
-//     const password = this.password.value;
-//     const object = { email, password }
-//
-//     console.log(`Email: ${email.value}, Password: ${password.value}`);
-//     await identityStore.authenticate(object)
-// }
 </script>
 
 <style lang="sass" scoped>

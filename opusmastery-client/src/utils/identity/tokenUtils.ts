@@ -1,19 +1,27 @@
 import jwtDecode from 'jwt-decode';
 
-export function getAccessToken(): string {
-    return localStorage.getItem('token') || '';
+export function getLocalAccessToken(): string {
+    return localStorage.getItem('accessToken') || '';
 }
 
-export function getRefreshToken(): string {
+export function setLocalAccessToken(accessToken: string) {
+    localStorage.setItem('accessToken', accessToken);
+}
+
+export function getLocalRefreshToken(): string {
     return localStorage.getItem('refreshToken') || '';
 }
 
-export function parseJwt(token: string): unknown {
+export function setLocalRefreshToken(refreshToken: string) {
+    localStorage.setItem('refreshToken', refreshToken);
+}
+
+export function parseJwtPayload(token: string): unknown {
     try {
         return jwtDecode(token);
     }
     catch (error) {
-        alert('Got invalid access token while trying to parse JWT!')
+        alert('Got invalid access token while trying to parse payload')
         throw error;
     }
 }
