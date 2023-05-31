@@ -16,12 +16,12 @@ export function setLocalRefreshToken(refreshToken: string) {
     localStorage.setItem('refreshToken', refreshToken);
 }
 
-export function parseJwtPayload(token: string): unknown {
+export function parseJwtPayload(token: string): any {
     try {
         return jwtDecode(token);
     }
     catch (error) {
-        alert('Got invalid access token while trying to parse payload')
+        alert('Got invalid JWT while trying to parse payload')
         throw error;
     }
 }

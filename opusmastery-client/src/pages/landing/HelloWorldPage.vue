@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import EmployeeCard from 'components/employee/EmployeeCard.vue';
 
 defineProps<{ msg: string }>()
 const count = ref(0)
@@ -19,4 +20,13 @@ const count = ref(0)
     <p>
         Install <a href="https://github.com/vuejs/language-tools" target="_blank">Volar</a> in your IDE for a better DX
     </p>
+    <EmployeeCard
+        full-name="Rostyslav Nakarlovich"
+        position="Software Engineer"
+        status="Active"
+        email="example@gmail.com"
+        phone="(209) 501-0109"
+        department-name="R&D"
+        date-of-joining="2022-07-21"
+    />
 </template>

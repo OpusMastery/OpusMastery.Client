@@ -13,8 +13,7 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:vue/vue3-strongly-recommended',
-    'prettier'
+    'plugin:vue/vue3-strongly-recommended'
   ],
   plugins: [
     '@typescript-eslint',
@@ -34,17 +33,14 @@ module.exports = {
   },
   rules: {
     'prefer-promise-reject-errors': 'off',
-    quotes: ['warn', 'single', { avoidEscape: true }],
-    // this rule, if on, would require explicit return type on the `render` function
-    '@typescript-eslint/no-explicit-any': 'warn',
+    quotes: ['error', 'single', { avoidEscape: true }],
+    '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
-    // in plain CommonJS modules, you can't use `import foo = require('foo')` to pass this rule, so it has to be disabled
-    '@typescript-eslint/no-var-requires': 'off',
-    // The core 'no-unused-vars' rules (in the eslint:recommended ruleset)
-    // does not work with type definitions
+    '@typescript-eslint/no-var-requires': 'error',
     'vue/html-indent': ['error', 4],
+    'vue/singleline-html-element-content-newline': 'off',
+    'vue/max-attributes-per-line': 'off',
     'no-unused-vars': 'off',
-    // allow debugger during development only
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   }
 }
