@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useIdentityStore } from 'stores/indentity/identityStore';
+import { useIdentityStore } from 'stores/identity/identityStore';
 
 const identityStore = useIdentityStore();
 

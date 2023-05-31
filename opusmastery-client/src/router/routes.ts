@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 const routes: RouteRecordRaw[] = [
     {
         path: '/',
-        component: () => import('layouts/MainLayout.vue'),
+        component: () => import('layouts/LandingLayout.vue'),
         meta: {
             isAuthRequired: false,
         },
@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
                 name: 'LandingPage',
                 component: () => import('pages/IndexPage.vue'),
                 meta: {
-                    title: 'OpusMastery Landing'
+                    title: 'OpusMastery Project'
                 }
             },
             {
