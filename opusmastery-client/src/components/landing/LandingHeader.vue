@@ -1,12 +1,14 @@
 <template>
     <q-header>
-        <q-toolbar>
-            <q-btn @click="goToLanding()" class="color-primary text-bold" flat>OpusMastery</q-btn>
-            <q-space />
-            <div class="login">
-                <q-btn @click="goToSignIn()" rounded no-caps class="btn-round color-primary text-bold">Sign in</q-btn>
-                <q-separator vertical dark />
-                <q-btn @click="goToSignUp()" rounded no-caps class="btn-round color-primary text-bold">Try now</q-btn>
+        <q-toolbar class="main-toolbar">
+            <div class="main-toolbar-container">
+                <img @click="goToLanding()" class="clickable" src="images/logo-colored-horizontal-small.svg" alt="OpusMastery logo">
+                <q-space />
+                <div class="login-section">
+                    <BaseButton @callback="goToSignIn" text="Sign in" font-size="large" :icon="laSignInAltSolid" />
+                    <q-separator vertical dark />
+                    <BaseButton @callback="goToSignUp" text="Try now" font-size="large" :icon="laIdCardSolid" />
+                </div>
             </div>
         </q-toolbar>
     </q-header>
@@ -14,6 +16,8 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
+import { laSignInAltSolid, laIdCardSolid } from '@quasar/extras/line-awesome'
+import BaseButton from 'components/base/BaseButton.vue';
 
 const router = useRouter();
 
@@ -31,8 +35,24 @@ const goToSignUp = () => {
 </script>
 
 <style lang="sass" scoped>
-.login
+.main-toolbar
+    padding: 26px 46px 16px
     display: flex
-    flex-flow: row wrap
+    flex-flow: row nowrap
+    justify-content: center
+
+.main-toolbar-container
+    width: 100%
+    max-width: 1408px
+    display: flex
+    flex-flow: row nowrap
+    align-items: center
+
+.login-section
+    display: flex
+    flex-flow: row nowrap
     column-gap: 8px
+
+.clickable
+    cursor: pointer
 </style>

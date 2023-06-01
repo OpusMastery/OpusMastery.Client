@@ -1,7 +1,7 @@
 @import url('quasar.variables.scss');
 @import url('satoshi.css');
 
-// Possible font families:
+// Possible fonts in family:
 //font-family: 'Satoshi-Variable';
 //font-family: 'Satoshi-VariableItalic';
 //font-family: 'Satoshi-Light';
@@ -19,8 +19,8 @@
     font-family: 'Satoshi-Regular', monospace;
 }
 
-.color-primary {
-    color: $info;
+.text-regular {
+    font-family: 'Satoshi-Regular', monospace;
 }
 
 .text-medium {
