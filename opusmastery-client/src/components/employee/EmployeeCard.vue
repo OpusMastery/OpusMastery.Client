@@ -6,29 +6,35 @@
                     <img src="https://cdn.quasar.dev/img/avatar.png" alt="Employee avatar">
                 </q-avatar>
                 <div class="text-h6 text-bold">{{ props.fullName }}</div>
-                <div class="text-subtitle2 text-grey-7 text-medium">{{ props.position }}</div>
+                <div class="text-subtitle2 text-medium text-grey-7">{{ props.position }}</div>
                 <BaseStateLabel
                     class="employee-status-label text-bold"
-                    :title="upperCaseStatus"
+                    :title="capitalizedStatus"
                     :color="statusColor"
                 />
             </div>
         </q-card-section>
         <q-card-section class="card-entry">
-            <div class="employee-contact-info">
-                <div class="text-subtitle1 text-black"> <q-icon :name="matMailOutline" /> &nbsp;{{ props.email }}</div>
-                <div class="text-subtitle1 text-black"> <q-icon :name="matPhoneIphone" /> &nbsp;{{ props.phone }}</div>
+            <div class="employee-contact-info text-subtitle1 text-medium">
+                <div>
+                    <q-icon :name="matMailOutline" />
+                    <div>{{ props.email }}</div>
+                </div>
+                <div>
+                    <q-icon :name="matPhoneIphone" />
+                    <div>{{ props.phone }}</div>
+                </div>
             </div>
         </q-card-section>
         <q-card-section class="card-entry">
-            <div class="employee-work-info">
+            <div class="employee-work-info text-subtitle1">
                 <div>
-                    <div class="text-subtitle1 text-black">Department</div>
-                    <div class="text-subtitle1 text-black text-medium">{{ props.departmentName }}</div>
+                    <div>Department</div>
+                    <div class="text-medium">{{ props.departmentName }}</div>
                 </div>
                 <div>
-                    <div class="text-subtitle1 text-black">Date of joining</div>
-                    <div class="text-subtitle1 text-black text-medium">{{ formatDate(new Date(props.dateOfJoining), 'MM-DD-YYYY') }}</div>
+                    <div>Date of joining</div>
+                    <div class="text-medium">{{ formatDate(new Date(props.dateOfJoining), 'MM-DD-YYYY') }}</div>
                 </div>
             </div>
         </q-card-section>
@@ -43,22 +49,22 @@ import BaseStateLabel from 'components/base/BaseStateLabel.vue';
 
 const labelColors: Record<string, string> = {
     'Active': '#1d322fe6',
-    'Inactive': '#c4975bff'
+    'Inactive': '#c4975bff',
 };
 
-const props = defineProps<{
-    fullName: string,
-    position: string,
-    status: string,
-    email: string,
-    phone: string,
-    departmentName: string,
-    dateOfJoining: string
-}>();
+const props = defineProps({
+    fullName: { type: String, required: true },
+    position: { type: String, required: true },
+    status: { type: String, required: true, validator: (value: string) => ['Active', 'Inactive'].includes(value) },
+    email: { type: String, required: true },
+    phone: { type: String, required: true },
+    departmentName: { type: String, required: true },
+    dateOfJoining: { type: String, required: true },
+});
 
-const upperCaseStatus = computed(() => {
-    return props.status.toUpperCase();
-})
+const capitalizedStatus = computed(() => {
+    return props.status?.toUpperCase() ?? '';
+});
 const statusColor = computed(() => {
     return labelColors[props.status];
 });
@@ -77,9 +83,9 @@ const statusColor = computed(() => {
     min-height: 228px
     padding: 28px 0 0
     display: flex
-    flex-direction: column
-    row-gap: 4px
+    flex-flow: column wrap
     align-items: center
+    row-gap: 4px
 
 .employee-status-label
     margin-top: 6px
@@ -92,6 +98,9 @@ const statusColor = computed(() => {
 
 .employee-contact-info > div
     margin: 4px 0
+    display: flex
+    align-items: center
+    column-gap: 12px
 
 .employee-work-info
     padding: 10px 16px

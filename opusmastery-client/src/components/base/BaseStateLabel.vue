@@ -7,10 +7,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-const props = defineProps<{
-    title: string,
-    color: string
-}>();
+const props = defineProps({
+    title: { type: String, required: true },
+    color: { type: String, required: true },
+});
 
 const titleColor = computed(() => {
     return props.color;

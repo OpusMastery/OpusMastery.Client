@@ -1,27 +1,42 @@
 <template>
-    <div class="login">
-        <div class="text-h3">
-            Login into The Employee Hub <q-badge align="top">v1.1.000</q-badge>
+    <div class="login-form">
+        <div>
+            <img
+                src="images/logo-black-horizontal-small.svg"
+                alt="OpusMastery big logo"
+                class="login-logo"
+            >
+            <div class="text-h4">
+                Login into Employee Portal
+            </div>
+            <BaseInput
+                v-model="email"
+                label="Email"
+                placeholder="Enter your email"
+                type="email"
+            />
+            <BaseInput
+                v-model="password"
+                label="Password"
+                placeholder="Enter your password"
+                type="password"
+            />
+            <BaseButton
+                @callback="submitLoginForm"
+                text="Login"
+                font-size="large"
+                accent="primary"
+                class="login-button"
+            />
         </div>
-        <form @submit.prevent="submitLoginForm()">
-            <div>
-                <label>Email:</label>
-                <input id="email" v-model="email" type="email" required>
-            </div>
-            <div>
-                <label>Password:</label>
-                <input id="password" v-model="password" type="password" required>
-            </div>
-            <button type="submit">
-                Login
-            </button>
-        </form>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
 import { useIdentityStore } from 'stores/identity/identityStore';
+import BaseInput from 'components/base/BaseInput.vue';
+import BaseButton from 'components/base/BaseButton.vue';
 
 const identityStore = useIdentityStore();
 
@@ -34,13 +49,24 @@ const submitLoginForm = async () => {
 </script>
 
 <style lang="sass" scoped>
-.login
-    margin-top: 200px
-    text-align: center
-
-.login form
+.login-form
+    height: 80vh
+    width: 100%
     display: flex
-    flex-direction: column
-    gap: 10px
+    justify-content: center
     align-items: center
+
+.login-form > div
+    width: 100%
+    max-width: 672px
+    display: flex
+    flex-flow: column wrap
+    align-items: center
+    row-gap: 24px
+
+.login-logo
+    margin-bottom: 36px
+
+.login-button
+    margin-top: 12px
 </style>

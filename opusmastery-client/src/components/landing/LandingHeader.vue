@@ -2,12 +2,29 @@
     <q-header>
         <q-toolbar class="main-toolbar">
             <div class="main-toolbar-container">
-                <img @click="goToLanding()" class="clickable" src="images/logo-colored-horizontal-small.svg" alt="OpusMastery logo">
+                <img
+                    @click="goToLanding()"
+                    class="cursor-pointer"
+                    src="images/logo-colored-horizontal-small.svg"
+                    alt="OpusMastery logo"
+                >
                 <q-space />
                 <div class="login-section">
-                    <BaseButton @callback="goToSignIn" text="Sign in" font-size="large" :icon="laSignInAltSolid" />
+                    <BaseButton
+                        @callback="goToSignIn"
+                        text="Sign in"
+                        font-size="large"
+                        :icon="laSignInAltSolid"
+                        accent="secondary"
+                    />
                     <q-separator vertical dark />
-                    <BaseButton @callback="goToSignUp" text="Try now" font-size="large" :icon="laIdCardSolid" />
+                    <BaseButton
+                        @callback="goToSignUp"
+                        text="Try now"
+                        font-size="large"
+                        :icon="laIdCardSolid"
+                        accent="secondary"
+                    />
                 </div>
             </div>
         </q-toolbar>
@@ -52,7 +69,4 @@ const goToSignUp = () => {
     display: flex
     flex-flow: row nowrap
     column-gap: 8px
-
-.clickable
-    cursor: pointer
 </style>

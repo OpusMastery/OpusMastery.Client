@@ -35,12 +35,21 @@ const routes: RouteRecordRaw[] = [
         ]
     },
     {
-        path: '/some-portal-route',
+        path: '/portal',
         component: () => import('layouts/MainLayout.vue'),
         meta: {
             isAuthRequired: true,
         },
-        children: []
+        children: [
+            {
+                path: '',
+                name: 'PortalPage',
+                component: () => import('pages/IndexPage.vue'),
+                meta: {
+                    title: 'OpusMastery Dashboard'
+                }
+            }
+        ]
     },
     {
         path: '/:catchAll(.*)',

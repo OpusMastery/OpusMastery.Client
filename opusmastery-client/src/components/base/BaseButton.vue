@@ -2,13 +2,16 @@
     <q-btn
         rounded
         no-caps
+        no-wrap
         @click="$emit('callback')"
         :disable="props.disabled"
-        :class="fontSizeClass"
-        class="base-button"
+        :class="['base-button', fontSizeClass, accent]"
     >
         <template v-if="props.icon">
-            <q-icon class="inner-icon" :name="props.icon" />
+            <q-icon
+                :class="props.text ? 'inner-icon' : ''"
+                :name="props.icon"
+            />
         </template>
         {{ props.text }}
     </q-btn>
@@ -18,10 +21,11 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-    text: { type: String, required: true },
-    fontSize: { type: String, required: true, validator: (value: string) => ['small', 'medium', 'large'].includes(value) },
+    text: { type: String, default: undefined },
+    fontSize: { type: String, default: undefined, validator: (value: string) => ['small', 'medium', 'large'].includes(value) },
+    icon: { type: String, default: undefined },
+    accent: { type: String, default: undefined, validator: (value: string) => ['primary', 'secondary'].includes(value) },
     disabled: { type: Boolean, default: false },
-    icon: { type: String, default: null }
 });
 
 defineEmits<{
@@ -36,8 +40,21 @@ const fontSizeClass = computed(() => {
 </script>
 
 <style lang="sass" scoped>
+@import 'src/css/quasar.variables.scss'
+
+.base-button
+    width: 100%
+
 .base-button[disabled]
     pointer-events: none
+
+.primary
+    background-color: $primary
+    color: $secondary
+
+.secondary
+    background-color: $secondary
+    color: $primary
 
 .inner-icon
     margin-right: 4px
