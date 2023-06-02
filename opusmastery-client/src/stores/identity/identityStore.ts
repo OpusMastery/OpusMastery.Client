@@ -6,6 +6,7 @@ import { useLocalStorage } from '@vueuse/core';
 import { parseJwtPayload } from 'src/utils/identity/tokenUtils';
 import { AuthenticationTokens, UserCredentials } from 'stores/models';
 
+export const STATUS_ENDPOINT = 'api/v1/identity/status'
 export const REGISTRATION_ENDPOINT = '/api/v1/identity/register';
 export const LOGIN_ENDPOINT = '/api/v1/identity/login';
 export const REFRESH_TOKEN_ENDPOINT = '/api/v1/identity/refresh-token';
@@ -14,6 +15,11 @@ export const useIdentityStore = defineStore('identity', () => {
     const userId = ref(useLocalStorage('userId', ''));
     const accessToken = ref(useLocalStorage('accessToken', ''));
     const refreshToken = ref(useLocalStorage('refreshToken', ''));
+
+    async function getUserStatus(email: string): Promise<'NewlyCreated' | 'Incomplete' | 'Registered' | 'Deactivated' | 'Nonexistent'> {
+        const response = await apiInstance.get(`${STATUS_ENDPOINT}?userEmail=${encodeURIComponent(email)}`);
+        return response.data.status;
+    }
 
     async function authenticateUser(userCredentials: UserCredentials): Promise<void> {
         try {
@@ -65,5 +71,5 @@ export const useIdentityStore = defineStore('identity', () => {
         delete axios.defaults.headers.common['Authorization'];
     }
 
-    return { authenticateUser, refreshAccessToken, accessToken, refreshToken, userId };
+    return { getUserStatus, authenticateUser, refreshAccessToken, accessToken, refreshToken, userId };
 });

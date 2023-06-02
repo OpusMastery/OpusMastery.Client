@@ -13,7 +13,7 @@ const routes: RouteRecordRaw[] = [
                 name: 'LandingPage',
                 component: () => import('pages/IndexPage.vue'),
                 meta: {
-                    title: 'OpusMastery Project'
+                    title: 'Genuine Employee Management System | OpusMastery'
                 }
             },
             {
@@ -21,7 +21,15 @@ const routes: RouteRecordRaw[] = [
                 name: 'AboutPage',
                 component: () => import('pages/landing/HelloWorldPage.vue'),
                 meta: {
-                    title: 'About us'
+                    title: 'About us | OpusMastery'
+                }
+            },
+            {
+                path: '/sign-up',
+                name: 'SignUpPage',
+                component: () => import('pages/identity/RegistrationPage.vue'),
+                meta: {
+                    title: 'Sign-up to start building Company | OpusMastery'
                 }
             },
             {
@@ -29,14 +37,14 @@ const routes: RouteRecordRaw[] = [
                 name: 'SignInPage',
                 component: () => import('pages/identity/LoginPage.vue'),
                 meta: {
-                    title: 'Sign-in to explore your Company'
+                    title: 'Sign-in to explore your Company | OpusMastery'
                 }
-            }
+            },
         ]
     },
     {
         path: '/portal',
-        component: () => import('layouts/MainLayout.vue'),
+        component: () => import('layouts/PortalLayout.vue'),
         meta: {
             isAuthRequired: true,
         },
@@ -48,7 +56,7 @@ const routes: RouteRecordRaw[] = [
                 meta: {
                     title: 'OpusMastery Dashboard'
                 }
-            }
+            },
         ]
     },
     {
@@ -57,7 +65,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
             title: '404 - Please be mindful!'
         }
-    }
+    },
 ];
 
 export default routes;

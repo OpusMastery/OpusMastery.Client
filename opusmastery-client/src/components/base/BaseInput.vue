@@ -6,6 +6,8 @@
         :placeholder="props.placeholder"
         :hint="props.hint"
         hide-hint
+        :error="props.hasError"
+        :error-message="props.errorMessage"
         maxlength="128"
         class="base-input"
     >
@@ -23,6 +25,8 @@ const props = defineProps({
     label: { type: String, required: true },
     placeholder: { type: String, default: undefined },
     hint: { type: String, default: undefined },
+    hasError: { type: Boolean, default: false },
+    errorMessage: { type: String, default: undefined },
     isClearable: { type: Boolean, default: false },
 });
 </script>

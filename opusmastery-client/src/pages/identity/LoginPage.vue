@@ -11,15 +11,15 @@
             </div>
             <BaseInput
                 v-model="email"
+                type="email"
                 label="Email"
                 placeholder="Enter your email"
-                type="email"
             />
             <BaseInput
                 v-model="password"
+                type="password"
                 label="Password"
                 placeholder="Enter your password"
-                type="password"
             />
             <BaseButton
                 @callback="submitLoginForm"
@@ -38,14 +38,14 @@ import { useIdentityStore } from 'stores/identity/identityStore';
 import BaseInput from 'components/base/BaseInput.vue';
 import BaseButton from 'components/base/BaseButton.vue';
 
-const identityStore = useIdentityStore();
+const store = useIdentityStore();
 
 const email = ref('');
 const password = ref('');
 
 const submitLoginForm = async () => {
-    await identityStore.authenticateUser({ email: email.value, password: password.value });
-}
+    await store.authenticateUser({ email: email.value, password: password.value });
+};
 </script>
 
 <style lang="sass" scoped>
