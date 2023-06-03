@@ -1,6 +1,6 @@
 <template>
     <div class="registration-form">
-        <div class="q-pa-md q-gutter-y-xs">
+        <div class="q-gutter-y-md">
             <div class="text-h4 text-bold q-my-md">
                 Create a free account
             </div>
@@ -175,8 +175,8 @@ watchDebounced(
         validInputs.passwordConfirmation.value = false;
         errorFlags.passwordConfirmation.value = inputs.password.value !== inputs.passwordConfirmation.value;
 
-        if (errorFlags.password.value) {
-            errorMessages.passwordConfirmation.value = 'Passwords and its confirmation must match';
+        if (errorFlags.passwordConfirmation.value) {
+            errorMessages.passwordConfirmation.value = 'Password and its confirmation must match';
         } else {
             validInputs.passwordConfirmation.value = true;
         }
