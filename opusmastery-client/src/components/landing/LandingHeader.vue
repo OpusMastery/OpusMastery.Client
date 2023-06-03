@@ -13,17 +13,17 @@
                     <BaseButton
                         @callback="goToSignIn"
                         text="Sign in"
-                        font-size="large"
                         :icon="laSignInAltSolid"
                         accent="secondary"
+                        class="text-bold"
                     />
                     <q-separator vertical dark />
                     <BaseButton
                         @callback="goToSignUp"
                         text="Try now"
-                        font-size="large"
                         :icon="laIdCardSolid"
                         accent="secondary"
+                        class="text-bold"
                     />
                 </div>
             </div>
@@ -33,7 +33,7 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router';
-import { laSignInAltSolid, laIdCardSolid } from '@quasar/extras/line-awesome'
+import { laSignInAltSolid, laIdCardSolid } from '@quasar/extras/line-awesome';
 import BaseButton from 'components/base/BaseButton.vue';
 
 const router = useRouter();
@@ -55,18 +55,15 @@ const goToSignUp = () => {
 .main-toolbar
     padding: 26px 46px 16px
     display: flex
-    flex-flow: row nowrap
     justify-content: center
 
 .main-toolbar-container
     width: 100%
     max-width: 1408px
     display: flex
-    flex-flow: row nowrap
     align-items: center
 
 .login-section
     display: flex
-    flex-flow: row nowrap
     column-gap: 8px
 </style>

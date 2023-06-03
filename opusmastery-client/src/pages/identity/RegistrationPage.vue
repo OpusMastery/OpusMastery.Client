@@ -1,75 +1,77 @@
 <template>
-    <div class="registration-form">
-        <div class="q-gutter-y-md">
-            <div class="text-h4 text-bold q-my-md">
-                Create a free account
-            </div>
-            <div class="text-subtitle1 text-grey-7 text-medium q-my-md">
-                You are just one step away from unlocking the powerful tool to manage your company
-            </div>
-            <div>
-                <BaseInput
-                    v-model="inputs.email.value"
-                    type="email"
-                    label="Email"
-                    placeholder="Enter your work email"
-                    :has-error="errorFlags.email.value"
-                    :error-message="errorMessages.email.value"
-                />
-            </div>
-            <div class="row q-gutter-md">
-                <div class="col-auto" style="flex: 1">
+    <q-page>
+        <div class="registration-form">
+            <div class="q-gutter-y-md">
+                <div class="text-h4 text-bold q-my-md">
+                    Create a free account
+                </div>
+                <div class="text-subtitle1 text-grey-7 text-medium q-my-md">
+                    You are just one step away from unlocking the powerful tool to manage your company
+                </div>
+                <div>
                     <BaseInput
-                        v-model="inputs.password.value"
-                        type="password"
-                        label="Password"
-                        placeholder="Think of secure password"
-                        hint="Must be between 8 and 64 characters"
-                        :has-error="errorFlags.password.value"
-                        :error-message="errorMessages.password.value"
+                        v-model="inputs.email.value"
+                        type="email"
+                        label="Email"
+                        placeholder="Enter your work email"
+                        :has-error="errorFlags.email.value"
+                        :error-message="errorMessages.email.value"
                     />
                 </div>
-                <div class="col-auto" style="flex: 1">
-                    <BaseInput
-                        v-model="inputs.passwordConfirmation.value"
-                        type="password"
-                        label="Password confirmation"
-                        placeholder="Confirm your password"
-                        :has-error="errorFlags.passwordConfirmation.value"
-                        :error-message="errorMessages.passwordConfirmation.value"
+                <div class="row q-gutter-md">
+                    <div class="col-auto" style="flex: 1">
+                        <BaseInput
+                            v-model="inputs.password.value"
+                            type="password"
+                            label="Password"
+                            placeholder="Think of secure password"
+                            hint="Must be between 8 and 64 characters"
+                            :has-error="errorFlags.password.value"
+                            :error-message="errorMessages.password.value"
+                        />
+                    </div>
+                    <div class="col-auto" style="flex: 1">
+                        <BaseInput
+                            v-model="inputs.passwordConfirmation.value"
+                            type="password"
+                            label="Password confirmation"
+                            placeholder="Confirm your password"
+                            :has-error="errorFlags.passwordConfirmation.value"
+                            :error-message="errorMessages.passwordConfirmation.value"
+                        />
+                    </div>
+                </div>
+                <div class="row q-gutter-md">
+                    <div class="col-auto" style="flex: 1">
+                        <BaseInput
+                            v-model="inputs.firstName.value"
+                            type="text"
+                            label="First Name"
+                            placeholder="Enter your first name"
+                        />
+                    </div>
+                    <div class="col-auto" style="flex: 1">
+                        <BaseInput
+                            v-model="inputs.lastName.value"
+                            type="text"
+                            label="Last Name"
+                            placeholder="Enter your last name"
+                        />
+                    </div>
+                </div>
+                <div>
+                    <BaseButton
+                        @callback="register"
+                        text="Register now"
+                        accent="primary"
+                        :disabled="!hasAllCorrectInputs"
+                        style="margin-top: 18px"
+                        class="text-bold"
                     />
                 </div>
-            </div>
-            <div class="row q-gutter-md">
-                <div class="col-auto" style="flex: 1">
-                    <BaseInput
-                        v-model="inputs.firstName.value"
-                        type="text"
-                        label="First Name"
-                        placeholder="Enter your first name"
-                    />
-                </div>
-                <div class="col-auto" style="flex: 1">
-                    <BaseInput
-                        v-model="inputs.lastName.value"
-                        type="text"
-                        label="Last Name"
-                        placeholder="Enter your last name"
-                    />
-                </div>
-            </div>
-            <div>
-                <BaseButton
-                    @callback="register"
-                    text="Register now"
-                    font-size="large"
-                    accent="primary"
-                    :disabled="!hasAllCorrectInputs"
-                    style="margin-top: 18px"
-                />
             </div>
         </div>
-    </div>
+    </q-page>
 </template>
 
 <script setup lang="ts">

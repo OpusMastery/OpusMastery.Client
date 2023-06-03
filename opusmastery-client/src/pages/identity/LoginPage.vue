@@ -1,35 +1,37 @@
 <template>
-    <div class="login-form">
-        <div>
-            <img
-                src="images/logo-black-horizontal-small.svg"
-                alt="OpusMastery big logo"
-                style="margin-bottom: 36px"
-            >
-            <div class="text-h4 text-bold">
-                Login into Employee Portal
+    <q-page>
+        <div class="login-form">
+            <div>
+                <img
+                    src="images/logo-black-horizontal-small.svg"
+                    alt="OpusMastery big logo"
+                    style="margin-bottom: 36px"
+                >
+                <div class="text-h4 text-bold">
+                    Login into Employee Portal
+                </div>
+                <BaseInput
+                    v-model="email"
+                    type="email"
+                    label="Email"
+                    placeholder="Enter your company email"
+                />
+                <BaseInput
+                    v-model="password"
+                    type="password"
+                    label="Password"
+                    placeholder="Enter your password"
+                />
+                <BaseButton
+                    @callback="submitLoginForm"
+                    text="Login"
+                    accent="primary"
+                    style="margin-top: 18px"
+                    class="text-bold"
+                />
             </div>
-            <BaseInput
-                v-model="email"
-                type="email"
-                label="Email"
-                placeholder="Enter your company email"
-            />
-            <BaseInput
-                v-model="password"
-                type="password"
-                label="Password"
-                placeholder="Enter your password"
-            />
-            <BaseButton
-                @callback="submitLoginForm"
-                text="Login"
-                font-size="large"
-                accent="primary"
-                style="margin-top: 18px"
-            />
         </div>
-    </div>
+    </q-page>
 </template>
 
 <script setup lang="ts">

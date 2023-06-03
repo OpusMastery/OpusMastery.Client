@@ -18,8 +18,10 @@ const titleColor = computed(() => {
 </script>
 
 <style lang="sass" scoped>
+@import 'src/css/quasar.variables.scss'
+
 .state-label
-    color: #ffffff
+    color: $background
     background-color: v-bind(titleColor)
     padding: 6px 24px
     border-radius: 20px

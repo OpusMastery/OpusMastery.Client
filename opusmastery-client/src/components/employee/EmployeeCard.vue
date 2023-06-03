@@ -71,6 +71,8 @@ const statusColor = computed(() => {
 </script>
 
 <style lang="sass" scoped>
+@import 'src/css/quasar.variables.scss'
+
 .employee-card
     width: 100%
     max-width: 328px
@@ -93,7 +95,7 @@ const statusColor = computed(() => {
 .employee-contact-info
     padding: 10px 16px
     border-radius: 20px
-    background-color: rgb(196, 151, 91, .2)
+    background-color: $creamy
     text-align: left
 
 .employee-contact-info > div
@@ -105,7 +107,7 @@ const statusColor = computed(() => {
 .employee-work-info
     padding: 10px 16px
     border-radius: 20px
-    background-color: rgba(191, 167, 249, .2)
+    background-color: $purple
 
 .employee-work-info > div
     margin: 4px 0
