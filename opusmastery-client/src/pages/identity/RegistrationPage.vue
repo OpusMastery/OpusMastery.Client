@@ -106,7 +106,7 @@ const validInputs = {
 };
 
 const hasAllCorrectInputs = computed(() => {
-    return validInputs.email.value && validInputs.password.value;
+    return validInputs.email.value && validInputs.password.value && validInputs.passwordConfirmation.value;
 });
 
 const register = async () => {
@@ -129,10 +129,10 @@ const register = async () => {
 watchDebounced(
     inputs.email,
     async () => {
-        validInputs.email.value = false;
         errorFlags.email.value = !checkWithRegex('email', inputs.email.value);
 
         if (errorFlags.email.value) {
+            validInputs.email.value = false;
             errorMessages.email.value = 'Please write your email in correct format';
         } else {
             await checkUserStatus(inputs.email.value);
@@ -157,10 +157,10 @@ const checkUserStatus = async (email: string): Promise<string> => {
 watchDebounced(
     inputs.password,
     () => {
-        validInputs.password.value = false;
         errorFlags.password.value = !checkWithRegex('password', inputs.password.value);
 
         if (errorFlags.password.value) {
+            validInputs.password.value = false;
             errorMessages.password.value = 'Password must be at least 8 characters long, contain at least 1 uppercase letter and 1 number';
         } else {
             validInputs.password.value = true;
@@ -172,10 +172,10 @@ watchDebounced(
 watchDebounced(
     inputs.passwordConfirmation,
     () => {
-        validInputs.passwordConfirmation.value = false;
         errorFlags.passwordConfirmation.value = inputs.password.value !== inputs.passwordConfirmation.value;
 
         if (errorFlags.passwordConfirmation.value) {
+            validInputs.passwordConfirmation.value = false;
             errorMessages.passwordConfirmation.value = 'Password and its confirmation must match';
         } else {
             validInputs.passwordConfirmation.value = true;

@@ -8,18 +8,17 @@ declare module '@vue/runtime-core' {
     }
 }
 
-const defaultHeaders = {
-    Accept: 'application/json'
-};
-
 const apiInstance = axios.create({
     baseURL: 'https://opusmastery.org',
-    headers: defaultHeaders
+    headers: {
+        Accept: 'application/json',
+    },
 });
 
-export default boot(({ app }) => {
-    axios.interceptors.request.use(async (config) => {
-        const accessToken = useIdentityStore().storeAccessToken
+export default boot(() => {
+    apiInstance.interceptors.request.use((config) => {
+        const accessToken = useIdentityStore().accessToken;
+
         if (accessToken && config.headers) {
             config.headers.Authorization = `Bearer ${accessToken}`;
         }
@@ -27,13 +26,10 @@ export default boot(({ app }) => {
         return config;
     });
 
-    axios.interceptors.response.use(
+    apiInstance.interceptors.response.use(
         (response) => response,
-        (error) => alert(error),
+        (error) => console.log(error),
     );
-
-    app.config.globalProperties.$axios = axios;
-    app.config.globalProperties.$api = apiInstance;
 });
 
 export { apiInstance };
