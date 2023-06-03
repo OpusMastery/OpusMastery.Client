@@ -30,7 +30,3 @@ const props = defineProps({
     isClearable: { type: Boolean, default: false },
 });
 </script>
-
-<style lang="sass" scoped>
-
-</style>

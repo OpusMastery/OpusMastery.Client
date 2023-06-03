@@ -5,13 +5,13 @@ const routes: RouteRecordRaw[] = [
         path: '/',
         component: () => import('layouts/LandingLayout.vue'),
         meta: {
-            isAuthRequired: false,
+            isAuthenticationRequired: false,
         },
         children: [
             {
                 path: '',
                 name: 'LandingPage',
-                component: () => import('pages/IndexPage.vue'),
+                component: () => import('pages/landing/HelloWorldPage.vue'),
                 meta: {
                     title: 'Genuine Employee Management System | OpusMastery'
                 }
@@ -43,16 +43,16 @@ const routes: RouteRecordRaw[] = [
         ]
     },
     {
-        path: '/portal',
+        path: '/dashboard',
         component: () => import('layouts/PortalLayout.vue'),
         meta: {
-            isAuthRequired: true,
+            isAuthenticationRequired: true,
         },
         children: [
             {
                 path: '',
-                name: 'PortalPage',
-                component: () => import('pages/IndexPage.vue'),
+                name: 'DashboardPage',
+                component: () => import('pages/portal/DashboardPage.vue'),
                 meta: {
                     title: 'OpusMastery Dashboard'
                 }

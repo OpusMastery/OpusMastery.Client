@@ -31,7 +31,7 @@ export const useIdentityStore = defineStore('identity', () => {
 
             setUserId('');
             setNewIdentity(response.data.accessToken, response.data.refreshToken);
-            this.router.push({ name: 'PortalPage' })
+            this.router.push({ name: 'DashboardPage' })
         } catch (_) {
             clearAuthenticationCredentials();
             this.router.push({ name: 'SignInPage' })
