@@ -6,6 +6,7 @@
         @click="$emit('callback')"
         :disable="props.disabled"
         :class="['base-button', fontSizeClass, accent]"
+        style="width: 100%"
     >
         <template v-if="props.icon">
             <q-icon
@@ -41,9 +42,6 @@ const fontSizeClass = computed(() => {
 
 <style lang="sass" scoped>
 @import 'src/css/quasar.variables.scss'
-
-.base-button
-    width: 100%
 
 .base-button[disabled]
     pointer-events: none

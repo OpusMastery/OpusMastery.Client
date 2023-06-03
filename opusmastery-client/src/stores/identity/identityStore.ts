@@ -4,7 +4,7 @@ import axios from 'axios';
 import { apiInstance } from 'boot/axios';
 import { useLocalStorage } from '@vueuse/core';
 import { parseJwtPayload } from 'src/utils/identity/tokenUtils';
-import { AuthenticationTokens, UserCredentials } from 'stores/models';
+import { AuthenticationTokens, RegistrationDetails, UserCredentials } from 'stores/models';
 
 export const STATUS_ENDPOINT = 'api/v1/identity/status'
 export const REGISTRATION_ENDPOINT = '/api/v1/identity/register';
@@ -19,6 +19,10 @@ export const useIdentityStore = defineStore('identity', () => {
     async function getUserStatus(email: string): Promise<'NewlyCreated' | 'Incomplete' | 'Registered' | 'Deactivated' | 'Nonexistent'> {
         const response = await apiInstance.get(`${STATUS_ENDPOINT}?userEmail=${encodeURIComponent(email)}`);
         return response.data.status;
+    }
+
+    async function registerUser(registrationDetails: RegistrationDetails): Promise<void> {
+        await apiInstance.post(REGISTRATION_ENDPOINT, registrationDetails);
     }
 
     async function authenticateUser(userCredentials: UserCredentials): Promise<void> {
@@ -71,5 +75,5 @@ export const useIdentityStore = defineStore('identity', () => {
         delete axios.defaults.headers.common['Authorization'];
     }
 
-    return { getUserStatus, authenticateUser, refreshAccessToken, accessToken, refreshToken, userId };
+    return { getUserStatus, registerUser, authenticateUser, refreshAccessToken, accessToken, refreshToken, userId };
 });

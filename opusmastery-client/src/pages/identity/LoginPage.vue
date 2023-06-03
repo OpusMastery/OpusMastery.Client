@@ -4,16 +4,16 @@
             <img
                 src="images/logo-black-horizontal-small.svg"
                 alt="OpusMastery big logo"
-                class="login-logo"
+                style="margin-bottom: 36px"
             >
-            <div class="text-h4">
+            <div class="text-h4 text-bold">
                 Login into Employee Portal
             </div>
             <BaseInput
                 v-model="email"
                 type="email"
                 label="Email"
-                placeholder="Enter your email"
+                placeholder="Enter your company email"
             />
             <BaseInput
                 v-model="password"
@@ -26,7 +26,7 @@
                 text="Login"
                 font-size="large"
                 accent="primary"
-                class="login-button"
+                style="margin-top: 18px"
             />
         </div>
     </div>
@@ -51,7 +51,6 @@ const submitLoginForm = async () => {
 <style lang="sass" scoped>
 .login-form
     height: 80vh
-    width: 100%
     display: flex
     justify-content: center
     align-items: center
@@ -63,10 +62,4 @@ const submitLoginForm = async () => {
     flex-flow: column wrap
     align-items: center
     row-gap: 24px
-
-.login-logo
-    margin-bottom: 36px
-
-.login-button
-    margin-top: 12px
 </style>

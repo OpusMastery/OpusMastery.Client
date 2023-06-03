@@ -9,7 +9,7 @@
         :error="props.hasError"
         :error-message="props.errorMessage"
         maxlength="128"
-        class="base-input"
+        style="width: 100%"
     >
         <template #append v-if="props.isClearable">
             <q-icon :name="laEraserSolid" class="cursor-pointer" />
@@ -25,13 +25,12 @@ const props = defineProps({
     label: { type: String, required: true },
     placeholder: { type: String, default: undefined },
     hint: { type: String, default: undefined },
-    hasError: { type: Boolean, default: false },
+    hasError: { type: Boolean, default: undefined },
     errorMessage: { type: String, default: undefined },
     isClearable: { type: Boolean, default: false },
 });
 </script>
 
 <style lang="sass" scoped>
-.base-input
-    width: 100%
+
 </style>

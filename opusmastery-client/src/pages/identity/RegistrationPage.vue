@@ -1,49 +1,74 @@
 <template>
-    <div class="q-pa-md">
-        <BaseInput
-            v-model="inputs.email.value"
-            type="email"
-            label="Email"
-            placeholder="Enter your email"
-            :has-error="errorFlags.email.value"
-            :error-message="errorMessages.email.value"
-        />
-        <BaseInput
-            v-model="inputs.password.value"
-            type="password"
-            label="Password"
-            placeholder="Think of secure password"
-            hint="Must be between 8 and 64 characters"
-            :has-error="errorFlags.password.value"
-            :error-message="errorMessages.password.value"
-        />
-        <BaseInput
-            v-model="inputs.passwordConfirmation.value"
-            type="password"
-            label="Confirm Password"
-            placeholder="Confirm your password"
-            :has-error="errorFlags.passwordConfirmation.value"
-            :error-message="errorMessages.passwordConfirmation.value"
-        />
-        <BaseInput
-            v-model="inputs.firstName.value"
-            type="text"
-            label="First Name"
-            placeholder="Enter your first name"
-        />
-        <BaseInput
-            v-model="inputs.lastName.value"
-            type="text"
-            label="Last Name"
-            placeholder="Enter your last name"
-        />
-        <BaseButton
-            @callback="register"
-            text="Register"
-            font-size="large"
-            accent="primary"
-            :disabled="!hasCorrectInputs"
-        />
+    <div class="registration-form">
+        <div class="q-pa-md q-gutter-y-xs">
+            <div class="text-h4 text-bold q-my-md">
+                Create a free account
+            </div>
+            <div class="text-subtitle1 text-grey-7 text-medium q-my-md">
+                You are just one step away from unlocking the powerful tool to manage your company
+            </div>
+            <div>
+                <BaseInput
+                    v-model="inputs.email.value"
+                    type="email"
+                    label="Email"
+                    placeholder="Enter your work email"
+                    :has-error="errorFlags.email.value"
+                    :error-message="errorMessages.email.value"
+                />
+            </div>
+            <div class="row q-gutter-md">
+                <div class="col-auto" style="flex: 1">
+                    <BaseInput
+                        v-model="inputs.password.value"
+                        type="password"
+                        label="Password"
+                        placeholder="Think of secure password"
+                        hint="Must be between 8 and 64 characters"
+                        :has-error="errorFlags.password.value"
+                        :error-message="errorMessages.password.value"
+                    />
+                </div>
+                <div class="col-auto" style="flex: 1">
+                    <BaseInput
+                        v-model="inputs.passwordConfirmation.value"
+                        type="password"
+                        label="Password confirmation"
+                        placeholder="Confirm your password"
+                        :has-error="errorFlags.passwordConfirmation.value"
+                        :error-message="errorMessages.passwordConfirmation.value"
+                    />
+                </div>
+            </div>
+            <div class="row q-gutter-md">
+                <div class="col-auto" style="flex: 1">
+                    <BaseInput
+                        v-model="inputs.firstName.value"
+                        type="text"
+                        label="First Name"
+                        placeholder="Enter your first name"
+                    />
+                </div>
+                <div class="col-auto" style="flex: 1">
+                    <BaseInput
+                        v-model="inputs.lastName.value"
+                        type="text"
+                        label="Last Name"
+                        placeholder="Enter your last name"
+                    />
+                </div>
+            </div>
+            <div>
+                <BaseButton
+                    @callback="register"
+                    text="Register now"
+                    font-size="large"
+                    accent="primary"
+                    :disabled="!hasAllCorrectInputs"
+                    style="margin-top: 18px"
+                />
+            </div>
+        </div>
     </div>
 </template>
 
@@ -77,15 +102,28 @@ const errorMessages = {
 const validInputs = {
     email: ref(false),
     password: ref(false),
+    passwordConfirmation: ref(false),
 };
 
-const hasCorrectInputs = computed(() => {
+const hasAllCorrectInputs = computed(() => {
     return validInputs.email.value && validInputs.password.value;
 });
 
-const register = () => {
-    console.log({ email: inputs.email, password: inputs.password })
-    console.log('Registration button clicked');
+const register = async () => {
+    const status = await checkUserStatus(inputs.email.value);
+    if (status === 'Nonexistent') {
+        await store.registerUser({
+            email: inputs.email.value,
+            password: inputs.password.value,
+            firstName: inputs.firstName.value,
+            lastName: inputs.lastName.value,
+        });
+
+        await store.authenticateUser({
+            email: inputs.email.value,
+            password: inputs.password.value,
+        });
+    }
 };
 
 watchDebounced(
@@ -93,6 +131,7 @@ watchDebounced(
     async () => {
         validInputs.email.value = false;
         errorFlags.email.value = !checkWithRegex('email', inputs.email.value);
+
         if (errorFlags.email.value) {
             errorMessages.email.value = 'Please write your email in correct format';
         } else {
@@ -102,14 +141,17 @@ watchDebounced(
     { debounce: 250, maxWait: 600 },
 );
 
-const checkUserStatus = async (email: string): Promise<void> => {
+const checkUserStatus = async (email: string): Promise<string> => {
     const userStatus = await store.getUserStatus(email);
     errorFlags.email.value = userStatus !== 'Nonexistent';
+
     if (errorFlags.email.value) {
         errorMessages.email.value = 'This email is already registered';
     } else {
         validInputs.email.value = true;
     }
+
+    return userStatus;
 };
 
 watchDebounced(
@@ -117,6 +159,7 @@ watchDebounced(
     () => {
         validInputs.password.value = false;
         errorFlags.password.value = !checkWithRegex('password', inputs.password.value);
+
         if (errorFlags.password.value) {
             errorMessages.password.value = 'Password must be at least 8 characters long, contain at least 1 uppercase letter and 1 number';
         } else {
@@ -129,12 +172,13 @@ watchDebounced(
 watchDebounced(
     inputs.passwordConfirmation,
     () => {
-        validInputs.password.value = false;
+        validInputs.passwordConfirmation.value = false;
         errorFlags.passwordConfirmation.value = inputs.password.value !== inputs.passwordConfirmation.value;
+
         if (errorFlags.password.value) {
             errorMessages.passwordConfirmation.value = 'Passwords and its confirmation must match';
         } else {
-            validInputs.password.value = true;
+            validInputs.passwordConfirmation.value = true;
         }
     },
     { debounce: 250, maxWait: 600 },
@@ -142,5 +186,13 @@ watchDebounced(
 </script>
 
 <style lang="sass" scoped>
+.registration-form
+    height: 80vh
+    display: flex
+    justify-content: center
+    align-items: center
 
+.registration-form > div
+    width: 100%
+    max-width: 672px
 </style>
