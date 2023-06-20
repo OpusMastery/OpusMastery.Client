@@ -3,7 +3,7 @@
         <q-card-section class="card-entry">
             <div class="employee-general-info">
                 <q-avatar size="76px">
-                    <img src="https://cdn.quasar.dev/img/avatar.png" alt="Employee avatar">
+                    <img :src="props.icon" alt="Employee avatar">
                 </q-avatar>
                 <div class="text-h6 text-bold">{{ props.fullName }}</div>
                 <div class="text-subtitle2 text-medium text-grey-7">{{ props.position }}</div>
@@ -60,6 +60,7 @@ const props = defineProps({
     phone: { type: String, required: true },
     departmentName: { type: String, required: true },
     dateOfJoining: { type: String, required: true },
+    icon: { type: String, required: true },
 });
 
 const capitalizedStatus = computed(() => {

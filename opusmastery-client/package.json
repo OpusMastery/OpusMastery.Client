@@ -8,10 +8,12 @@
   "scripts": {
     "lint": "eslint --ext .js,.ts,.vue ./",
     "dev": "quasar dev",
-    "build": "quasar build"
+    "build": "quasar build",
+    "calendar": "quasar ext add @quasar/qcalendar@next"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
+    "@quasar/quasar-ui-qcalendar": "^4.0.0-beta.16",
     "@vueuse/core": "^10.1.2",
     "axios": "^1.4.0",
     "dayjs": "^1.11.7",
@@ -23,6 +25,7 @@
   },
   "devDependencies": {
     "@quasar/app-vite": "^1.4.3",
+    "@quasar/quasar-app-extension-qcalendar": "^4.0.0-beta.15",
     "@types/node": "^18.16.14",
     "@typescript-eslint/eslint-plugin": "^5.59.7",
     "@typescript-eslint/parser": "^5.59.7",

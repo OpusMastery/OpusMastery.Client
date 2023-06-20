@@ -10,16 +10,13 @@ export interface UserCredentials {
     password: string;
 }
 
-export interface AuthenticationTokens  {
+export interface AuthenticationTokens {
     accessToken: string;
     refreshToken: string;
 }
 
-export interface Todo {
-    id: number;
-    content: string;
-}
-
-export interface Meta {
-    totalCount: number;
+export interface EmployeeDetails {
+    email: string;
+    employeeId: string;
+    companyId: string;
 }

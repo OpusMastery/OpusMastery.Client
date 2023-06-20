@@ -18,6 +18,7 @@ const apiInstance = axios.create({
 export default boot(() => {
     apiInstance.interceptors.request.use((config) => {
         const accessToken = useIdentityStore().accessToken;
+        console.log(accessToken);
 
         if (accessToken && config.headers) {
             config.headers.Authorization = `Bearer ${accessToken}`;

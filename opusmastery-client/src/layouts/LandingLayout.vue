@@ -3,14 +3,15 @@
         <LandingHeader />
 
         <q-page-container class="colored-container">
-            <router-view />
+            <q-page>
+                <router-view />
+            </q-page>
         </q-page-container>
     </q-layout>
 </template>
 
 <script setup lang="ts">
 import LandingHeader from 'components/landing/LandingHeader.vue';
-
 </script>
 
 <style lang="sass" scoped>

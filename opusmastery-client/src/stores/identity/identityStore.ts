@@ -31,7 +31,7 @@ export const useIdentityStore = defineStore('identity', () => {
 
             setUserId('');
             setNewIdentity(response.data.accessToken, response.data.refreshToken);
-            this.router.push({ name: 'DashboardPage' })
+            this.router.push({ name: 'EmployeesPage' })
         } catch (_) {
             clearAuthenticationCredentials();
             this.router.push({ name: 'SignInPage' })
@@ -75,5 +75,5 @@ export const useIdentityStore = defineStore('identity', () => {
         delete axios.defaults.headers.common['Authorization'];
     }
 
-    return { getUserStatus, registerUser, authenticateUser, refreshAccessToken, accessToken, refreshToken, userId };
+    return { accessToken, refreshToken, userId, getUserStatus, registerUser, authenticateUser, refreshAccessToken, clearAuthenticationCredentials };
 });

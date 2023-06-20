@@ -11,21 +11,13 @@ const routes: RouteRecordRaw[] = [
             {
                 path: '',
                 name: 'LandingPage',
-                component: () => import('pages/landing/HelloWorldPage.vue'),
+                component: () => import('pages/landing/LandingPage.vue'),
                 meta: {
                     title: 'Genuine Employee Management System | OpusMastery'
                 }
             },
             {
-                path: '/about',
-                name: 'AboutPage',
-                component: () => import('pages/landing/HelloWorldPage.vue'),
-                meta: {
-                    title: 'About us | OpusMastery'
-                }
-            },
-            {
-                path: '/sign-up',
+                path: 'sign-up',
                 name: 'SignUpPage',
                 component: () => import('pages/identity/RegistrationPage.vue'),
                 meta: {
@@ -33,7 +25,7 @@ const routes: RouteRecordRaw[] = [
                 }
             },
             {
-                path: '/sign-in',
+                path: 'sign-in',
                 name: 'SignInPage',
                 component: () => import('pages/identity/LoginPage.vue'),
                 meta: {
@@ -44,15 +36,23 @@ const routes: RouteRecordRaw[] = [
     },
     {
         path: '/dashboard',
-        component: () => import('layouts/PortalLayout.vue'),
+        component: () => import('layouts/DashboardLayout.vue'),
         meta: {
             isAuthenticationRequired: true,
         },
         children: [
             {
-                path: '',
-                name: 'DashboardPage',
-                component: () => import('pages/portal/DashboardPage.vue'),
+                path: '/employees',
+                name: 'EmployeesPage',
+                component: () => import('pages/dashboard/EmployeesPage.vue'),
+                meta: {
+                    title: 'OpusMastery Dashboard'
+                }
+            },
+            {
+                path: '/absence',
+                name: 'AbsencePage',
+                component: () => import('pages/dashboard/AbsencePage.vue'),
                 meta: {
                     title: 'OpusMastery Dashboard'
                 }
