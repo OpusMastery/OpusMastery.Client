@@ -29,7 +29,6 @@ const props = defineProps({
 @import 'src/css/quasar.variables.scss'
 
 .holiday-card
-    border-radius: 20px
     display: flex
     flex-flow: row nowrap
     white-space: nowrap
